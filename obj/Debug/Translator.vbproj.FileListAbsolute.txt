@@ -1,0 +1,28 @@
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Localization - Quest.txt
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Localization.txt
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Translator.exe.config
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Translator.exe
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Translator.pdb
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\bin\Debug\Translator.xml
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.vbprojAssemblyReference.cache
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.Form1.resources
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.Resources.resources
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.vbproj.GenerateResource.cache
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.vbproj.CoreCompileInputs.cache
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.exe
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.xml
+C:\Users\jaegerbo\Source\Repos\jaegerbo\Translator2\Translator\obj\Debug\Translator.pdb
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Localization - Quest.txt
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Localization.txt
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Translator.exe.config
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Translator.exe
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Translator.pdb
+C:\Users\jaegerbo\source\repos\Translator3\bin\Debug\Translator.xml
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.vbprojAssemblyReference.cache
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.Form1.resources
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.Resources.resources
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.vbproj.GenerateResource.cache
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.vbproj.CoreCompileInputs.cache
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.exe
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.xml
+C:\Users\jaegerbo\source\repos\Translator3\obj\Debug\Translator.pdb
