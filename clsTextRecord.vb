@@ -1,6 +1,7 @@
 ﻿Public Class clsTextRecord
 
 
+
    Private _Key As String
    Public Property Key() As String
       Get
