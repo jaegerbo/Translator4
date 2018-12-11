@@ -37,12 +37,27 @@ Represents a strongly typed in-memory cache of data.
 Represents the strongly named DataTable class.
 </summary>
 </member>
+<member name="T:Translator.dsTexte.tblQuestTexteDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:Translator.dsTexte.tblStandardTexteRow">
 <summary>
 Represents strongly named DataRow class.
 </summary>
 </member>
+<member name="T:Translator.dsTexte.tblQuestTexteRow">
+<summary>
+Represents strongly named DataRow class.
+</summary>
+</member>
 <member name="T:Translator.dsTexte.tblStandardTexteRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
+<member name="T:Translator.dsTexte.tblQuestTexteRowChangeEvent">
 <summary>
 Row event argument class
 </summary>

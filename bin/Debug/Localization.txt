@@ -16,7 +16,7 @@ awningGroupDesc,blocks,Block,KgNone,An awning made from cloth.,Une toile en tiss
 awningPyramid,blocks,Block,KeyChanged EnChanged,Awning Pyramid,Pyramide en toile marron,Stoffplane – Pyramide,,Pirámide canela de toldo,
 awningRamp,blocks,Block,KeyChanged EnChanged,Awning Ramp,Rampe en toile marron,Stoffplane – Rampe,,Rampa canela de toldo,
 awningRampSheet,blocks,Block,New,Awning Ramp Sheet,,,,,
-awningRampSheetEdgeLeft,blocks,Block,New,Awning Ramp Edge Left,,,,,
+awningRampSheetEdgeLeft,blocks,Block,New,Awning Ramp Edge Left,,Stoffplane – schraege linke Ecke,,,
 awningRampSheetEdgeRight,blocks,Block,New,Awning Ramp Edge Right,,,,,
 awningSheet,blocks,Block,New,Awning Sheet,,,,,
 barStool,blocks,Block,New,Bar Stool,,Barhocker,,,Stołek barowy

@@ -12,7 +12,7 @@
   <xs:element name="dsTexte" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsTexte" msprop:Generator_UserDSName="dsTexte">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="tblStandardTexte" msprop:Generator_TableClassName="tblStandardTexteDataTable" msprop:Generator_TableVarName="tabletblStandardTexte" msprop:Generator_TablePropName="tblStandardTexte" msprop:Generator_RowDeletingName="tblStandardTexteRowDeleting" msprop:Generator_RowChangingName="tblStandardTexteRowChanging" msprop:Generator_RowEvHandlerName="tblStandardTexteRowChangeEventHandler" msprop:Generator_RowDeletedName="tblStandardTexteRowDeleted" msprop:Generator_UserTableName="tblStandardTexte" msprop:Generator_RowChangedName="tblStandardTexteRowChanged" msprop:Generator_RowEvArgName="tblStandardTexteRowChangeEvent" msprop:Generator_RowClassName="tblStandardTexteRow">
+        <xs:element name="tblStandardTexte" msprop:Generator_TableClassName="tblStandardTexteDataTable" msprop:Generator_TableVarName="tabletblStandardTexte" msprop:Generator_RowChangedName="tblStandardTexteRowChanged" msprop:Generator_TablePropName="tblStandardTexte" msprop:Generator_RowDeletingName="tblStandardTexteRowDeleting" msprop:Generator_RowChangingName="tblStandardTexteRowChanging" msprop:Generator_RowEvHandlerName="tblStandardTexteRowChangeEventHandler" msprop:Generator_RowDeletedName="tblStandardTexteRowDeleted" msprop:Generator_RowClassName="tblStandardTexteRow" msprop:Generator_UserTableName="tblStandardTexte" msprop:Generator_RowEvArgName="tblStandardTexteRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Key" msprop:Generator_ColumnVarNameInTable="columnKey" msprop:Generator_ColumnPropNameInRow="Key" msprop:Generator_ColumnPropNameInTable="KeyColumn" msprop:Generator_UserColumnName="Key" type="xs:string" />
@@ -25,6 +25,21 @@
               <xs:element name="Klingon" msprop:Generator_ColumnVarNameInTable="columnKlingon" msprop:Generator_ColumnPropNameInRow="Klingon" msprop:Generator_ColumnPropNameInTable="KlingonColumn" msprop:Generator_UserColumnName="Klingon" type="xs:string" minOccurs="0" />
               <xs:element name="Spanish" msprop:Generator_ColumnVarNameInTable="columnSpanish" msprop:Generator_ColumnPropNameInRow="Spanish" msprop:Generator_ColumnPropNameInTable="SpanishColumn" msprop:Generator_UserColumnName="Spanish" type="xs:string" minOccurs="0" />
               <xs:element name="Polish" msprop:Generator_ColumnVarNameInTable="columnPolish" msprop:Generator_ColumnPropNameInRow="Polish" msprop:Generator_ColumnPropNameInTable="PolishColumn" msprop:Generator_UserColumnName="Polish" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="tblQuestTexte" msprop:Generator_TableClassName="tblQuestTexteDataTable" msprop:Generator_TableVarName="tabletblQuestTexte" msprop:Generator_TablePropName="tblQuestTexte" msprop:Generator_RowDeletingName="tblQuestTexteRowDeleting" msprop:Generator_RowChangingName="tblQuestTexteRowChanging" msprop:Generator_RowEvHandlerName="tblQuestTexteRowChangeEventHandler" msprop:Generator_RowDeletedName="tblQuestTexteRowDeleted" msprop:Generator_UserTableName="tblQuestTexte" msprop:Generator_RowChangedName="tblQuestTexteRowChanged" msprop:Generator_RowEvArgName="tblQuestTexteRowChangeEvent" msprop:Generator_RowClassName="tblQuestTexteRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Key" msprop:Generator_ColumnVarNameInTable="columnKey" msprop:Generator_ColumnPropNameInRow="Key" msprop:Generator_ColumnPropNameInTable="KeyColumn" msprop:Generator_UserColumnName="Key" type="xs:string" />
+              <xs:element name="Source" msprop:Generator_ColumnVarNameInTable="columnSource" msprop:Generator_ColumnPropNameInRow="Source" msprop:Generator_ColumnPropNameInTable="SourceColumn" msprop:Generator_UserColumnName="Source" type="xs:string" minOccurs="0" />
+              <xs:element name="Context" msprop:Generator_ColumnVarNameInTable="columnContext" msprop:Generator_ColumnPropNameInRow="Context" msprop:Generator_ColumnPropNameInTable="ContextColumn" msprop:Generator_UserColumnName="Context" type="xs:string" minOccurs="0" />
+              <xs:element name="Changes" msprop:Generator_ColumnVarNameInTable="columnChanges" msprop:Generator_ColumnPropNameInRow="Changes" msprop:Generator_ColumnPropNameInTable="ChangesColumn" msprop:Generator_UserColumnName="Changes" type="xs:string" minOccurs="0" />
+              <xs:element name="English" msprop:Generator_ColumnVarNameInTable="columnEnglish" msprop:Generator_ColumnPropNameInRow="English" msprop:Generator_ColumnPropNameInTable="EnglishColumn" msprop:Generator_UserColumnName="English" type="xs:string" minOccurs="0" />
+              <xs:element name="French" msprop:Generator_ColumnVarNameInTable="columnFrench" msprop:Generator_ColumnPropNameInRow="French" msprop:Generator_ColumnPropNameInTable="FrenchColumn" msprop:Generator_UserColumnName="French" type="xs:string" minOccurs="0" />
+              <xs:element name="German" msprop:Generator_ColumnVarNameInTable="columnGerman" msprop:Generator_ColumnPropNameInRow="German" msprop:Generator_ColumnPropNameInTable="GermanColumn" msprop:Generator_UserColumnName="German" type="xs:string" minOccurs="0" />
+              <xs:element name="Klingon" msprop:Generator_ColumnVarNameInTable="columnKlingon" msprop:Generator_ColumnPropNameInRow="Klingon" msprop:Generator_ColumnPropNameInTable="KlingonColumn" msprop:Generator_UserColumnName="Klingon" type="xs:string" minOccurs="0" />
+              <xs:element name="Spanish" msprop:Generator_ColumnVarNameInTable="columnSpanish" msprop:Generator_ColumnPropNameInRow="Spanish" msprop:Generator_ColumnPropNameInTable="SpanishColumn" msprop:Generator_UserColumnName="Spanish" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
