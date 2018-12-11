@@ -8,11 +8,12 @@ Public Class Form1
    Private _viewQuestTexte As New DataView
    Private _DataManager As New clsTextDataManager
 
-   Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-      _DataManager.saveTexte()
-   End Sub
+    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        ' Zweck:    Formular schließen und alles speichern
+        _DataManager.saveTexte()
+    End Sub
 
-   Private Sub gridTexte_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.CellValueChanged
+    Private Sub gridTexte_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.CellValueChanged
       showStatistik()
    End Sub
 
