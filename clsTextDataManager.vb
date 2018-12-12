@@ -38,33 +38,33 @@
             Return ds
          End If
 
-         Using fs As IO.StreamReader = Fi.OpenText
+            Using fs As IO.StreamReader = Fi.OpenText()
 
-            Dim isfirstRecord As Boolean = True
+                Dim isfirstRecord As Boolean = True
 
-            While Not fs.EndOfStream
-               Dim Zeile As String = fs.ReadLine
-               Dim TextArray As String() = Zeile.Split(","c)
+                While Not fs.EndOfStream
+                    Dim Zeile As String = fs.ReadLine
+                    Dim TextArray As String() = Zeile.Split(","c)
 
-               Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
-               row.Key = TextArray(0)
-               row.Source = TextArray(1)
-               row.Context = TextArray(2)
-               row.Changes = TextArray(3)
-               row.English = TextArray(4)
-               row.French = TextArray(5)
-               row.German = TextArray(6)
-               row.Klingon = TextArray(7)
-               row.Spanish = TextArray(8)
-               row.Polish = TextArray(9)
-               ds.tblStandardTexte.Rows.Add(row)
-            End While
+                    Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
+                    row.Key = TextArray(0)
+                    row.Source = TextArray(1)
+                    row.Context = TextArray(2)
+                    row.Changes = TextArray(3)
+                    row.English = TextArray(4)
+                    row.French = TextArray(5)
+                    row.German = TextArray(6)
+                    row.Klingon = TextArray(7)
+                    row.Spanish = TextArray(8)
+                    row.Polish = TextArray(9)
+                    ds.tblStandardTexte.Rows.Add(row)
+                End While
 
-            fs.Close()
-         End Using
+                fs.Close()
+            End Using
 
-         ' Questtexte
-         Fi = New IO.FileInfo("Localization - Quest.txt")
+            ' Questtexte
+            Fi = New IO.FileInfo("Localization - Quest.txt")
          If Fi.Exists = False Then
             MsgBox("Die Datei Localization - Quest.txt wurde nicht gefunden")
             Return ds

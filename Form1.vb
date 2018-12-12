@@ -126,4 +126,13 @@ Public Class Form1
       End Try
    End Sub
 
+    Private Sub gridTexte_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.RowEnter
+        ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
+        Try
+            Dim row As dsTexte.tblStandardTexteRow = Nothing
+        Catch ex As Exception
+            Stop
+        End Try
+    End Sub
+
 End Class
