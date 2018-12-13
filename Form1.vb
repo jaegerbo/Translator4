@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Text
 
 Public Class Form1
 
@@ -8,19 +9,19 @@ Public Class Form1
    Private _viewQuestTexte As New DataView
    Private _DataManager As New clsTextDataManager
 
-    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        ' Zweck:    Formular schließen und alles speichern
-        _DataManager.saveTexte()
-    End Sub
+   Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+      ' Zweck:    Formular schließen und alles speichern
+      _DataManager.saveTexte()
+   End Sub
 
-    Private Sub gridTexte_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.CellValueChanged
+   Private Sub gridTexte_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.CellValueChanged
       showStatistik()
    End Sub
 
    Private Sub showStatistik()
       ' Zweck:    Statusinformationen ermitteln und schreiben
       Try
-         If _DataManager.ds Is Nothing Then Exit Sub
+         If _DataManager.ds Is Nothing OrElse sbStatus.Items Is Nothing OrElse sbStatus.Items.Count = 0 Then Exit Sub
 
          Dim countAll As Integer = 0
          Dim countGerman As Integer = 0
@@ -117,6 +118,8 @@ Public Class Form1
 
          cbSource.DataSource = _DataManager.SourceList
 
+         gridVocabulary.DataSource = _DataManager.vocabularyHt
+
          _Stopwatch.Stop()
          showStatistik()
       Catch ex As Exception
@@ -126,13 +129,56 @@ Public Class Form1
       End Try
    End Sub
 
-    Private Sub gridTexte_RowEnter(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.RowEnter
-        ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
-        Try
-            Dim row As dsTexte.tblStandardTexteRow = Nothing
-        Catch ex As Exception
-            Stop
-        End Try
-    End Sub
+   Private Sub txtForeignLanguage_TextChanged(sender As Object, e As EventArgs) Handles txtForeignLanguage.TextChanged
+      ' Zweck:    Änderungen im Textfeld in den daten satz übernehmen
+
+      Try
+         If gridTexte.CurrentCell Is Nothing OrElse txtForeignLanguage.Text Is Nothing OrElse txtForeignLanguage.Text = String.Empty Then Exit Sub
+
+         Dim testResult As clsTestForTokenResult = testForToken(txtForeignLanguage.Text, "abc")
+         If testResult.tokenFound = True Then
+            txtForeignLanguage.Text = testResult.text
+            txtForeignLanguage.SelectionStart = testResult.selectionStart
+            txtForeignLanguage.SelectionLength = testResult.selectionLength
+         End If
+
+
+         'gridTexte.Rows(gridTexte.CurrentCell.RowIndex).Cells(6).Value = txtForeignLanguage.Text
+      Catch ex As Exception
+         Stop
+      End Try
+   End Sub
+   Private Function testForToken(text As String, token As String) As clsTestForTokenResult
+      ' Zweck:    prüfen, ob das gegebene Token im gegebenen Text vorkommt
+      Dim result As New clsTestForTokenResult With {.text = text}
+      Try
+         Dim additionToken As String = "def"
+         Dim TextArray() As String = text.Split(" "c)
+         If TextArray(TextArray.Length - 1) = token Then
+            result.tokenFound = True
+            result.selectionStart = text.Length
+            result.selectionLength = additionToken.Length
+            result.text &= additionToken
+         End If
+      Catch ex As Exception
+         Stop
+      End Try
+      Return result
+   End Function
+
+   Private Sub gridTexte_SelectionChanged(sender As Object, e As EventArgs) Handles gridTexte.SelectionChanged
+      ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
+      Try
+         If gridTexte.CurrentRow Is Nothing Then
+            txtEnglish.Text = Nothing
+            txtForeignLanguage.Text = Nothing
+         Else
+            txtEnglish.Text = gridTexte.CurrentRow.Cells(4).Value
+            txtForeignLanguage.Text = gridTexte.CurrentRow.Cells(6).Value
+         End If
+      Catch ex As Exception
+         Stop
+      End Try
+   End Sub
 
 End Class

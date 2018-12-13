@@ -26,6 +26,15 @@
       End Set
    End Property
 
+   Private _vocabularyHt As New clsVocabularyItemListHt
+   Public Property vocabularyHt() As clsVocabularyItemListHt
+      Get
+         Return _vocabularyHt
+      End Get
+      Set(ByVal value As clsVocabularyItemListHt)
+         _vocabularyHt = value
+      End Set
+   End Property
 
    Private Function getTexte() As dsTexte
       ' Zweck:    Alle Dateien einlesen
@@ -57,8 +66,10 @@
                     row.Klingon = TextArray(7)
                     row.Spanish = TextArray(8)
                     row.Polish = TextArray(9)
-                    ds.tblStandardTexte.Rows.Add(row)
-                End While
+               ds.tblStandardTexte.Rows.Add(row)
+
+               fillVocabulary(row.English, row.German)
+            End While
 
                 fs.Close()
             End Using
@@ -153,5 +164,50 @@
       End Try
       Return Liste
    End Function
+
+   Private Sub fillVocabulary(englishText As String, foreignText As String)
+      ' Zweck:    Der englische Text wird gesplittet, und für jedes Wort, das mindestens 3 Buchstaben hat wird ein Eintrag im Vokabular erstellt.
+      '           Zu diesem Wort werden alle fremdsprachlichen Wörter in eine Liste geschrieben.
+      Try
+         Dim englishWords() As String = englishText.Split(" "c)
+         Dim foreignWords() As String = foreignText.Split(" "c)
+
+         For Each englishWord As String In englishWords
+
+            ' prüfen, ob es für das Wort schon einen Eintrag im Vokabular gibt
+            If _vocabularyHt.ContainsKey(englishWord) = True Then
+
+               ' die Liste der fremdsprachlichen Texte ggf erweitern
+               Dim oldForeignWordsList As ArrayList = _vocabularyHt.Item(englishWord)
+
+               ' jedes neue fremdsprachliche Wort überprüfen, ob es schon in der Liste ist
+               For Each foreignWord As String In foreignWords
+                  If oldForeignWordsList.Contains(foreignWord) = False Then
+                     oldForeignWordsList.Add(foreignWord)
+                  End If
+               Next
+
+               ' die erweiterte Liste im Vokabular speichern
+               _vocabularyHt.Item(englishWord) = oldForeignWordsList
+
+            Else
+
+               ' einen neuen Eintrag im Vokabular anlegen.
+               ' Als Key wird das englische Wort verwendet, und als Value die Liste der zugehörigen fremdsprachlichen Wörter
+
+               ' den fremdsprachlichen Text in eine Liste umwandeln
+               Dim foreignWordsList As New ArrayList
+               For Each foreignWord As String In foreignWords
+                  foreignWordsList.Add(foreignWord)
+               Next
+
+               _vocabularyHt.Add(englishWord, foreignWordsList)
+            End If
+
+         Next
+      Catch ex As Exception
+         Stop
+      End Try
+   End Sub
 
 End Class

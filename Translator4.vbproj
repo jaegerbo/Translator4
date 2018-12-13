@@ -74,7 +74,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsTestForTokenResult.vb" />
     <Compile Include="clsTextDataManager.vb" />
+    <Compile Include="clsVocabularyItem.vb" />
+    <Compile Include="clsVocabularyItemListHt.vb" />
     <Compile Include="dsTexte.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

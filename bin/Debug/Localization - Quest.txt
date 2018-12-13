@@ -3,7 +3,7 @@ airConditioner,blocks,Block,KgNone,Air Conditioner,Climatiseur,Klimaanlage,,Aire
 airConditionVentFan,blocks,Block,New,Vent Fan,,Ventilator,,
 airConditionVentFanDouble,blocks,Block,New,"Vent Fan, Double",Doppelventilator,,
 alphabetLetterSignGroupDesc,blocks,Block,EnChanged,Create your own billboards with these single letter signs and numbers.,Créez vos propres panneaux grâce à ces lettres.,Erstelle mit diesen Buchstaben und Zahlen deine eigenen Plakatwände.,,Crea tus propios carteles con estas letras.
-arrowHelper,blocks,Block,New,Arrow Helper,,Pfeilhelfer,,
+arrowHelper,blocks,Block,New,Arrow Helper,,abc12 abcdef,,
 arrowSlit,blocks,Block,New,Arrow Slit,,Schiessscharte,,
 awningBlock,blocks,Block,KeyChanged EnChanged,Awning Block,Bloc en toile marron,Stoffplane – Block,,Bloque canela de toldo
 awningCNRFull,blocks,Block,KeyChanged EnChanged,Awning Corner Full,Angle complet en toile marron,Stoffplane – Komplette Ecke,,Esquina canela de toldo
@@ -29,7 +29,7 @@ birdBathPlanter,blocks,Block,New,Bird Bath Planter,,Blumenkuebel,,
 boardedWindowsSheet4,blocks,Block,KgNone,Window Boards,Rebords de fenêtre,Fensterbretter,,Tapias
 bodyBagBlack,blocks,Block,New,Body Bag Black,,Handtasche schwarz,,
 bodyBagPair,blocks,Block,New,Body Bag Pair,,Handtasche,,
-bodyBagPairMixed,blocks,Block,New,Body Bag Mixed,,,,
+bodyBagPairMixed,blocks,Block,New,Body Bag Mixed,,Body Bag gemischt,,
 bodyBagPairYellow,blocks,Block,New,Body Bag Pair Yellow,,Handtasche gelb,,
 bodyBagPile,blocks,Block,New,Body Bag Pile,,Guerteltasche,,
 bodyBagPileMix,blocks,Block,New,Body Bag Pile Mix,,,,
