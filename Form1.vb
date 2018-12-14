@@ -17,6 +17,27 @@ Public Class Form1
    Private Sub gridTexte_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles gridTexte.CellValueChanged
       showStatistik()
    End Sub
+   Private Sub gridTexte_SelectionChanged(sender As Object, e As EventArgs) Handles gridTexte.SelectionChanged
+      ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
+      Try
+         If gridTexte.CurrentRow Is Nothing Then
+            txtEnglish.Text = Nothing
+            txtForeignLanguage.Text = Nothing
+         Else
+            txtEnglish.Text = gridTexte.CurrentRow.Cells(4).Value
+            txtForeignLanguage.Text = gridTexte.CurrentRow.Cells(6).Value
+
+            ' Eine Liste möglicher Übersetzungen anzeigen
+            Dim vocabulatyList As ArrayList = _DataManager.getTempVocabulary(txtEnglish.Text)
+            If vocabulatyList.Count > 0 Then
+               txtWordList.Text = clsTextDataManager.listToString(vocabulatyList)
+            End If
+
+         End If
+      Catch ex As Exception
+         Stop
+      End Try
+   End Sub
 
    Private Sub showStatistik()
       ' Zweck:    Statusinformationen ermitteln und schreiben
@@ -130,16 +151,20 @@ Public Class Form1
    End Sub
 
    Private Sub txtForeignLanguage_TextChanged(sender As Object, e As EventArgs) Handles txtForeignLanguage.TextChanged
-      ' Zweck:    Änderungen im Textfeld in den daten satz übernehmen
-
+      ' Zweck:    Änderungen im Textfeld in den Datensatz übernehmen
       Try
          If gridTexte.CurrentCell Is Nothing OrElse txtForeignLanguage.Text Is Nothing OrElse txtForeignLanguage.Text = String.Empty Then Exit Sub
 
-         Dim testResult As clsTestForTokenResult = testForToken(txtForeignLanguage.Text, "abc")
-         If testResult.tokenFound = True Then
-            txtForeignLanguage.Text = testResult.text
-            txtForeignLanguage.SelectionStart = testResult.selectionStart
-            txtForeignLanguage.SelectionLength = testResult.selectionLength
+         Dim vocabulatyList As ArrayList = _DataManager.getTempVocabulary(txtEnglish.Text)
+         If vocabulatyList.Count > 0 Then
+
+            Dim testResult As clsTestForTokenResult = testForToken(txtForeignLanguage.Text, vocabulatyList)
+            If testResult.tokenFound = True Then
+               txtForeignLanguage.Text = testResult.text
+               txtForeignLanguage.SelectionStart = testResult.selectionStart
+               txtForeignLanguage.SelectionLength = testResult.selectionLength
+            End If
+
          End If
 
 
@@ -148,37 +173,29 @@ Public Class Form1
          Stop
       End Try
    End Sub
-   Private Function testForToken(text As String, token As String) As clsTestForTokenResult
-      ' Zweck:    prüfen, ob das gegebene Token im gegebenen Text vorkommt
+   Private Function testForToken(text As String, tokenList As ArrayList) As clsTestForTokenResult
+      ' Zweck:    prüfen, ob Token aus der gegebenen Liste im gegebenen Text vorkommen
       Dim result As New clsTestForTokenResult With {.text = text}
       Try
-         Dim additionToken As String = "def"
+         ' Aus dem Text das letzte Wort ermitteln
          Dim TextArray() As String = text.Split(" "c)
-         If TextArray(TextArray.Length - 1) = token Then
-            result.tokenFound = True
-            result.selectionStart = text.Length
-            result.selectionLength = additionToken.Length
-            result.text &= additionToken
-         End If
+         Dim lastWord As String = TextArray(TextArray.Length - 1)
+
+         ' Schleife über alle token
+         For Each token As String In tokenList
+
+            If token.StartsWith(lastWord) = True Then
+               result.tokenFound = True
+               result.selectionStart = text.Length
+               result.selectionLength = token.Length
+               result.text &= token
+            End If
+
+         Next
       Catch ex As Exception
          Stop
       End Try
       Return result
    End Function
-
-   Private Sub gridTexte_SelectionChanged(sender As Object, e As EventArgs) Handles gridTexte.SelectionChanged
-      ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
-      Try
-         If gridTexte.CurrentRow Is Nothing Then
-            txtEnglish.Text = Nothing
-            txtForeignLanguage.Text = Nothing
-         Else
-            txtEnglish.Text = gridTexte.CurrentRow.Cells(4).Value
-            txtForeignLanguage.Text = gridTexte.CurrentRow.Cells(6).Value
-         End If
-      Catch ex As Exception
-         Stop
-      End Try
-   End Sub
 
 End Class

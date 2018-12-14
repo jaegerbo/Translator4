@@ -21,16 +21,7 @@
    End Property
 
    Public Overrides Function ToString() As String
-      Dim Sb As New Text.StringBuilder
-      For Each item As String In _list
-         If Sb.ToString Is Nothing Then
-            Sb.Append(item)
-         Else
-            Sb.Append(", ")
-            Sb.Append(item)
-         End If
-      Next
-      Return $"{_key}: {Sb.ToString}"
+      Return clsTextDataManager.listToString(_list)
    End Function
 
 End Class

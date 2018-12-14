@@ -47,35 +47,35 @@
             Return ds
          End If
 
-            Using fs As IO.StreamReader = Fi.OpenText()
+         Using fs As IO.StreamReader = Fi.OpenText()
 
-                Dim isfirstRecord As Boolean = True
+            Dim isfirstRecord As Boolean = True
 
-                While Not fs.EndOfStream
-                    Dim Zeile As String = fs.ReadLine
-                    Dim TextArray As String() = Zeile.Split(","c)
+            While Not fs.EndOfStream
+               Dim Zeile As String = fs.ReadLine
+               Dim TextArray As String() = Zeile.Split(","c)
 
-                    Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
-                    row.Key = TextArray(0)
-                    row.Source = TextArray(1)
-                    row.Context = TextArray(2)
-                    row.Changes = TextArray(3)
-                    row.English = TextArray(4)
-                    row.French = TextArray(5)
-                    row.German = TextArray(6)
-                    row.Klingon = TextArray(7)
-                    row.Spanish = TextArray(8)
-                    row.Polish = TextArray(9)
+               Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
+               row.Key = TextArray(0)
+               row.Source = TextArray(1)
+               row.Context = TextArray(2)
+               row.Changes = TextArray(3)
+               row.English = TextArray(4)
+               row.French = TextArray(5)
+               row.German = TextArray(6)
+               row.Klingon = TextArray(7)
+               row.Spanish = TextArray(8)
+               row.Polish = TextArray(9)
                ds.tblStandardTexte.Rows.Add(row)
 
                fillVocabulary(row.English, row.German)
             End While
 
-                fs.Close()
-            End Using
+            fs.Close()
+         End Using
 
-            ' Questtexte
-            Fi = New IO.FileInfo("Localization - Quest.txt")
+         ' Questtexte
+         Fi = New IO.FileInfo("Localization - Quest.txt")
          If Fi.Exists = False Then
             MsgBox("Die Datei Localization - Quest.txt wurde nicht gefunden")
             Return ds
@@ -138,6 +138,29 @@
          Stop
       End Try
    End Sub
+
+   Public Function getTempVocabulary(englishText As String) As ArrayList
+      ' Zweck:    Für alle Wörter im gegebenen englischen Text die zugehörigen Vokabeleinträge ermitteln und zu einer Liste zusammenfassen
+      Dim Liste As New ArrayList
+      Try
+         Dim englishWords() As String = englishText.Split(" "c)
+         For Each englishWord As String In englishWords
+
+            ' im Vokabular die zugehörige Vokabelliste ermitteln
+            If _vocabularyHt.ContainsKey(englishWord) Then
+
+               For Each foreignWord As String In _vocabularyHt.Item(englishWord)
+                  Liste.Add(foreignWord)
+               Next
+
+            End If
+
+         Next
+      Catch ex As Exception
+         Stop
+      End Try
+      Return Liste
+   End Function
 
    Private Function getSourceList() As ArrayList
       Dim Liste As New ArrayList
@@ -209,5 +232,24 @@
          Stop
       End Try
    End Sub
+
+   ' öffentliche Methoden
+   Public Shared Function listToString(list As ArrayList) As String
+      ' Zweck:    Die gegebene Liste als String darstellen
+      Dim Sb As New Text.StringBuilder
+      Try
+         For Each item As String In list
+            If Sb.ToString Is Nothing Then
+               Sb.Append(item)
+            Else
+               Sb.Append(", ")
+               Sb.Append(item)
+            End If
+         Next
+      Catch ex As Exception
+         Stop
+      End Try
+      Return Sb.ToString
+   End Function
 
 End Class

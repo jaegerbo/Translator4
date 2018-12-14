@@ -60,12 +60,13 @@ Partial Class Form1
       Me.DataGridViewTextBoxColumn8 = New System.Windows.Forms.DataGridViewTextBoxColumn()
       Me.DataGridViewTextBoxColumn9 = New System.Windows.Forms.DataGridViewTextBoxColumn()
       Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-      Me.txtEnglish = New System.Windows.Forms.TextBox()
-      Me.txtForeignLanguage = New System.Windows.Forms.TextBox()
       Me.tabVocabulary = New System.Windows.Forms.TabPage()
       Me.gridVocabulary = New System.Windows.Forms.DataGridView()
       Me.key = New System.Windows.Forms.DataGridViewTextBoxColumn()
       Me.value = New System.Windows.Forms.DataGridViewTextBoxColumn()
+      Me.txtEnglish = New System.Windows.Forms.TextBox()
+      Me.txtForeignLanguage = New System.Windows.Forms.TextBox()
+      Me.txtWordList = New System.Windows.Forms.TextBox()
       CType(Me.gridTexte, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.TblStandardTexteDataTableBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.sbStatus.SuspendLayout()
@@ -364,24 +365,6 @@ Partial Class Form1
       Me.DataGridViewTextBoxColumn10.Name = "DataGridViewTextBoxColumn10"
       Me.DataGridViewTextBoxColumn10.Visible = False
       '
-      'txtEnglish
-      '
-      Me.txtEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.txtEnglish.Location = New System.Drawing.Point(130, 61)
-      Me.txtEnglish.Multiline = True
-      Me.txtEnglish.Name = "txtEnglish"
-      Me.txtEnglish.Size = New System.Drawing.Size(598, 74)
-      Me.txtEnglish.TabIndex = 9
-      '
-      'txtForeignLanguage
-      '
-      Me.txtForeignLanguage.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.txtForeignLanguage.Location = New System.Drawing.Point(734, 61)
-      Me.txtForeignLanguage.Multiline = True
-      Me.txtForeignLanguage.Name = "txtForeignLanguage"
-      Me.txtForeignLanguage.Size = New System.Drawing.Size(598, 74)
-      Me.txtForeignLanguage.TabIndex = 10
-      '
       'tabVocabulary
       '
       Me.tabVocabulary.Controls.Add(Me.gridVocabulary)
@@ -415,11 +398,39 @@ Partial Class Form1
       Me.value.Name = "value"
       Me.value.Width = 800
       '
+      'txtEnglish
+      '
+      Me.txtEnglish.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.txtEnglish.Location = New System.Drawing.Point(130, 61)
+      Me.txtEnglish.Multiline = True
+      Me.txtEnglish.Name = "txtEnglish"
+      Me.txtEnglish.Size = New System.Drawing.Size(598, 74)
+      Me.txtEnglish.TabIndex = 9
+      '
+      'txtForeignLanguage
+      '
+      Me.txtForeignLanguage.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.txtForeignLanguage.Location = New System.Drawing.Point(734, 61)
+      Me.txtForeignLanguage.Multiline = True
+      Me.txtForeignLanguage.Name = "txtForeignLanguage"
+      Me.txtForeignLanguage.Size = New System.Drawing.Size(598, 74)
+      Me.txtForeignLanguage.TabIndex = 10
+      '
+      'txtWordList
+      '
+      Me.txtWordList.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.txtWordList.Location = New System.Drawing.Point(734, 8)
+      Me.txtWordList.Multiline = True
+      Me.txtWordList.Name = "txtWordList"
+      Me.txtWordList.Size = New System.Drawing.Size(598, 48)
+      Me.txtWordList.TabIndex = 11
+      '
       'Form1
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(1382, 812)
+      Me.Controls.Add(Me.txtWordList)
       Me.Controls.Add(Me.txtForeignLanguage)
       Me.Controls.Add(Me.txtEnglish)
       Me.Controls.Add(Me.tabTexte)
@@ -488,4 +499,5 @@ Partial Class Form1
    Friend WithEvents gridVocabulary As DataGridView
    Friend WithEvents key As DataGridViewTextBoxColumn
    Friend WithEvents value As DataGridViewTextBoxColumn
+   Friend WithEvents txtWordList As TextBox
 End Class
