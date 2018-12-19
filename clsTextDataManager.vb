@@ -139,6 +139,34 @@
       End Try
    End Sub
 
+   Public Function createDatasetRow(Text As String) As dsTexte.tblQuestTexteRow
+      ' Zweck:    den gegebenen Text zerlegen, und in einen Datensatz umwandeln.
+      '           Grundsätzlich sind die einzelnen Sprachen durch Komma getrennt. Sollte ein Eintrag selber ein Komma enthalten, steht der ganze Eintrag
+      '           in Anführungszeichen
+      Dim row As dsTexte.tblQuestTexteRow = ds.tblQuestTexte.NewRow
+      Try
+         Dim i As Integer = 0
+         Dim TextArray As String() = Text.Split(","c)
+         Dim rowText As String = Nothing
+
+         For Each Element As String In TextArray
+
+            ' prüfen, ob das Element mit Anführungszeichen beginnt.
+            If Element.StartsWith("""") Then
+               rowText = Element.Substring(1, Element.Length - 2)
+            Else
+               rowText = Nothing
+               row(i) = Element
+               i += 1
+            End If
+
+         Next
+      Catch ex As Exception
+         Stop
+      End Try
+      Return row
+   End Function
+
    Public Function getTempVocabulary(englishText As String) As ArrayList
       ' Zweck:    Für alle Wörter im gegebenen englischen Text die zugehörigen Vokabeleinträge ermitteln und zu einer Liste zusammenfassen
       Dim Liste As New ArrayList
@@ -239,7 +267,7 @@
       Dim Sb As New Text.StringBuilder
       Try
          For Each item As String In list
-            If Sb.ToString Is Nothing Then
+            If Sb.Length = 0 Then
                Sb.Append(item)
             Else
                Sb.Append(", ")
