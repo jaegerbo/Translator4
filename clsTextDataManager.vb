@@ -150,10 +150,32 @@
          Dim i As Integer = 0
          Dim P As Integer = Resttext.IndexOf(","c)
 
-         Do While P > 0
+         Do While Resttext <> String.Empty
 
-            ErsterText = Text.Substring(Resttext, P)
-            Resttext = Text.Substring(P + 1, Resttext.Length - P)
+            ' prüfen, ob der Resttext mit Anführungszeichen beginnt. Wenn ja, wird das erste und zweite Anführungszeichen entfernt.
+            If Resttext.StartsWith("""") Then
+
+               ' 1. Anführungszeichen entfernen
+               Resttext = Resttext.Substring(1, Resttext.Length - 1)
+
+               ' Text bis zum 2. Anführungszeichen ermitteln
+               P = Resttext.IndexOf("""")
+               If P > 0 Then
+                  ErsterText = Resttext.Substring(0, P)
+                  If Resttext.Length - P - 2 < 0 Then
+                     Resttext = String.Empty
+                  Else
+                     Resttext = Resttext.Substring(P + 2, Resttext.Length - P - 2)
+                  End If
+               End If
+
+            Else
+
+               ErsterText = Resttext.Substring(0, P)
+               Resttext = Resttext.Substring(P + 1, Resttext.Length - P - 1)
+
+            End If
+
             P = Resttext.IndexOf(","c)
 
             row(i) = ErsterText
