@@ -145,22 +145,20 @@
       '           in Anführungszeichen
       Dim row As dsTexte.tblQuestTexteRow = ds.tblQuestTexte.NewRow
       Try
+         Dim ErsterText As String = Nothing
+         Dim Resttext As String = Text
          Dim i As Integer = 0
-         Dim TextArray As String() = Text.Split(","c)
-         Dim rowText As String = Nothing
+         Dim P As Integer = Resttext.IndexOf(","c)
 
-         For Each Element As String In TextArray
+         Do While P > 0
 
-            ' prüfen, ob das Element mit Anführungszeichen beginnt.
-            If Element.StartsWith("""") Then
-               rowText = Element.Substring(1, Element.Length - 2)
-            Else
-               rowText = Nothing
-               row(i) = Element
-               i += 1
-            End If
+            ErsterText = Text.Substring(Resttext, P)
+            Resttext = Text.Substring(P + 1, Resttext.Length - P)
+            P = Resttext.IndexOf(","c)
 
-         Next
+            row(i) = ErsterText
+            i += 1
+         Loop
       Catch ex As Exception
          Stop
       End Try
