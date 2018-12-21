@@ -53,22 +53,20 @@
 
             While Not fs.EndOfStream
                Dim Zeile As String = fs.ReadLine
-               Dim TextArray As String() = Zeile.Split(","c)
+               Dim list As ArrayList = createDatasetRow(Zeile)
 
-               Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
-               row.Key = TextArray(0)
-               row.Source = TextArray(1)
-               row.Context = TextArray(2)
-               row.Changes = TextArray(3)
-               row.English = TextArray(4)
-               row.French = TextArray(5)
-               row.German = TextArray(6)
-               row.Klingon = TextArray(7)
-               row.Spanish = TextArray(8)
-               row.Polish = TextArray(9)
-               ds.tblStandardTexte.Rows.Add(row)
+               If list.Count > 0 Then
+                  Dim row As dsTexte.tblStandardTexteRow = ds.tblStandardTexte.NewRow
+                  Dim i As Integer = 0
+                  For Each element As String In list
+                     row(i) = list(i)
+                     i += 1
+                  Next
+                  ds.tblStandardTexte.Rows.Add(row)
 
-               fillVocabulary(row.English, row.German)
+                  fillVocabulary(row.English, row.German)
+               End If
+
             End While
 
             fs.Close()
@@ -87,19 +85,20 @@
 
             While Not fs.EndOfStream
                Dim Zeile As String = fs.ReadLine
-               Dim TextArray As String() = Zeile.Split(","c)
+               Dim list As ArrayList = createDatasetRow(Zeile)
 
-               Dim row As dsTexte.tblQuestTexteRow = ds.tblQuestTexte.NewRow
-               row.Key = TextArray(0)
-               row.Source = TextArray(1)
-               row.Context = TextArray(2)
-               row.Changes = TextArray(3)
-               row.English = TextArray(4)
-               row.French = TextArray(5)
-               row.German = TextArray(6)
-               row.Klingon = TextArray(7)
-               row.Spanish = TextArray(8)
-               ds.tblQuestTexte.Rows.Add(row)
+               If list.Count > 0 Then
+                  Dim row As dsTexte.tblQuestTexteRow = ds.tblQuestTexte.NewRow
+                  Dim i As Integer = 0
+                  For Each element As String In list
+                     row(i) = list(i)
+                     i += 1
+                  Next
+                  ds.tblStandardTexte.Rows.Add(row)
+
+                  fillVocabulary(row.English, row.German)
+               End If
+
             End While
 
             fs.Close()
@@ -117,7 +116,7 @@
          Using sw As IO.StreamWriter = Fi.CreateText()
 
             For Each row As dsTexte.tblStandardTexteRow In ds.tblStandardTexte.Rows
-               sw.WriteLine($"{row.Key},{row.Source},{row.Context},{row.Changes},{row.English},{row.French},{row.German},{row.Klingon},{row.Spanish},{row.Polish}")
+               sw.WriteLine($"{row.Key},{row.Source},{row.Context},{row.Changes},{convertText(row.English)},{convertText(row.French)},{convertText(row.German)},{convertText(row.Klingon)},{convertText(row.Spanish)},{convertText(row.Polish)}")
             Next
 
             sw.Close()
@@ -129,7 +128,7 @@
          Using sw As IO.StreamWriter = Fi.CreateText()
 
             For Each row As dsTexte.tblStandardTexteRow In ds.tblStandardTexte.Rows
-               sw.WriteLine($"{row.Key},{row.Source},{row.Context},{row.Changes},{row.English},{row.French},{row.German},{row.Klingon},{row.Spanish}")
+               sw.WriteLine($"{row.Key},{row.Source},{row.Context},{row.Changes},{convertText(row.English)},{convertText(row.French)},{convertText(row.German)},{convertText(row.Klingon)},{convertText(row.Spanish)}")
             Next
 
             sw.Close()
@@ -138,16 +137,26 @@
          Stop
       End Try
    End Sub
+   Private Function convertText(Text As String) As String
+      ' Zweck:    Wenn der gegebene Text ein Komma enthält, wird er von Anführungszeichen umgeben
+      Try
+         If Text.Contains(",") = True Then
+            Return """" & Text & """"
+         End If
+      Catch ex As Exception
+         Stop
+      End Try
+      Return Text
+   End Function
 
-   Public Function createDatasetRow(Text As String) As dsTexte.tblQuestTexteRow
+   Public Function createDatasetRow(Text As String) As ArrayList
       ' Zweck:    den gegebenen Text zerlegen, und in einen Datensatz umwandeln.
       '           Grundsätzlich sind die einzelnen Sprachen durch Komma getrennt. Sollte ein Eintrag selber ein Komma enthalten, steht der ganze Eintrag
       '           in Anführungszeichen
-      Dim row As dsTexte.tblQuestTexteRow = ds.tblQuestTexte.NewRow
+      Dim list As New ArrayList
       Try
          Dim ErsterText As String = Nothing
          Dim Resttext As String = Text
-         Dim i As Integer = 0
          Dim P As Integer = Resttext.IndexOf(","c)
 
          Do While Resttext <> String.Empty
@@ -171,20 +180,25 @@
 
             Else
 
-               ErsterText = Resttext.Substring(0, P)
-               Resttext = Resttext.Substring(P + 1, Resttext.Length - P - 1)
+               If P = -1 Then
+                  ' Text ist am Ende
+                  ErsterText = Resttext
+                  Resttext = String.Empty
+               Else
+                  ErsterText = Resttext.Substring(0, P)
+                  Resttext = Resttext.Substring(P + 1, Resttext.Length - P - 1)
+               End If
 
             End If
 
             P = Resttext.IndexOf(","c)
 
-            row(i) = ErsterText
-            i += 1
+            list.Add(ErsterText)
          Loop
       Catch ex As Exception
          Stop
       End Try
-      Return row
+      Return list
    End Function
 
    Public Function getTempVocabulary(englishText As String) As ArrayList

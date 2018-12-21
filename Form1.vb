@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports System.Text
+Imports System.Net
 
 Public Class Form1
 
@@ -8,6 +9,7 @@ Public Class Form1
    Private _viewTexte As New DataView
    Private _viewQuestTexte As New DataView
    Private _DataManager As New clsTextDataManager
+   Private _ChangeEventActive As Boolean = True
 
    Private Sub Form1_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
       ' Zweck:    Formular schließen und alles speichern
@@ -20,6 +22,8 @@ Public Class Form1
    Private Sub gridTexte_SelectionChanged(sender As Object, e As EventArgs) Handles gridTexte.SelectionChanged
       ' Zweck:    Die Sprachen in extra Textboxen zur Verfügung stellen
       Try
+         _ChangeEventActive = False
+
          If gridTexte.CurrentRow Is Nothing Then
             txtEnglish.Text = Nothing
             txtForeignLanguage.Text = Nothing
@@ -36,6 +40,8 @@ Public Class Form1
          End If
       Catch ex As Exception
          Stop
+      Finally
+         _ChangeEventActive = True
       End Try
    End Sub
 
@@ -153,6 +159,7 @@ Public Class Form1
    Private Sub txtForeignLanguage_TextChanged(sender As Object, e As EventArgs) Handles txtForeignLanguage.TextChanged
       ' Zweck:    Änderungen im Textfeld in den Datensatz übernehmen
       Try
+         If _ChangeEventActive = False Then Exit Sub
          If gridTexte.CurrentCell Is Nothing OrElse txtForeignLanguage.Text Is Nothing OrElse txtForeignLanguage.Text = String.Empty Then Exit Sub
 
          Dim vocabulatyList As ArrayList = _DataManager.getTempVocabulary(txtEnglish.Text)
@@ -168,7 +175,7 @@ Public Class Form1
          End If
 
 
-         'gridTexte.Rows(gridTexte.CurrentCell.RowIndex).Cells(6).Value = txtForeignLanguage.Text
+         gridTexte.Rows(gridTexte.CurrentCell.RowIndex).Cells(6).Value = txtForeignLanguage.Text
       Catch ex As Exception
          Stop
       End Try
@@ -197,5 +204,30 @@ Public Class Form1
       End Try
       Return result
    End Function
+
+   Private Sub btnGoogle_Click(sender As Object, e As EventArgs) Handles btnGoogle.Click
+      ' Zweck:    den zu übersetzenden Text an den Google Übersetzer weiterleiten
+      Try
+         Dim Prozess As ProcessStartInfo
+
+         ' WOOD Berechtigungen als extra Programm starten
+         Prozess = New ProcessStartInfo With {.FileName = $"https://translate.google.com/?hl=de#view=home&op=translate&sl=en&tl=de&text={Web.HttpUtility.UrlEncode(txtEnglish.Text)}"}
+         'Prozess.Arguments = Parameter
+         Prozess.UseShellExecute = True
+         'Prozess.WindowStyle = WindowStyle
+         Process.Start(Prozess)
+
+         'Dim request As WebRequest = WebRequest.Create("https://translate.google.com/?hl=de#view=home&op=translate&sl=de&tl=en&text=Testtext")
+         'request.Credentials = CredentialCache.DefaultCredentials
+         'Using response As WebResponse = request.GetResponse()
+         '   Dim dataStream As IO.Stream = response.GetResponseStream()
+
+         '   response.Close()
+         'End Using
+
+      Catch ex As Exception
+         Stop
+      End Try
+   End Sub
 
 End Class
